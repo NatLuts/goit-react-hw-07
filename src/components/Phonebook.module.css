@@ -1,0 +1,68 @@
+.contact_list {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  padding: 0;
+}
+
+.list_item {
+  border: 2px solid black;
+  border-radius: 5px;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  max-width: 250px;
+  border: 2px solid rgb(148, 143, 143);
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+input:hover {
+  border: 2px solid rgb(72, 70, 70);
+}
+.form {
+  border: 2px solid black;
+  border-radius: 5px;
+  max-width: 250px;
+  padding: 10px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact_wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.form_input {
+  width: 240px;
+}
+
+.add_btn {
+  max-width: 110px;
+  font-size: 12px;
+}
+.add_btn:hover {
+  background-color: rgb(55, 114, 55);
+}
