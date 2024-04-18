@@ -1,14 +1,14 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { nanoid } from "nanoid";
 import s from "../Phonebook.module.css";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addNewContact } from "../../redux/contactsSlice";
+import { AddContactThunk } from "../../redux/contactsOps";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const handleSubmit = (data, actions) => {
-    dispatch(addNewContact({ ...data, id: nanoid() }));
+
+  const handleSubmit = (values, actions) => {
+    dispatch(AddContactThunk(values));
     actions.resetForm();
   };
 

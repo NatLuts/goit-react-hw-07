@@ -2,12 +2,12 @@ import s from "../Phonebook.module.css";
 import { FaUser } from "react-icons/fa6";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
+import { deleteContactThunk } from "../../redux/contactsOps";
 
 const Contact = ({ item }) => {
   const dispatch = useDispatch();
   const handleDelete = () => {
-    dispatch(deleteContact(id));
+    dispatch(deleteContactThunk(id));
   };
   const { id, name, number } = item;
   return (

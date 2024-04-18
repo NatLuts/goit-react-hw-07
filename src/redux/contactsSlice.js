@@ -1,8 +1,14 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
-import contactsData from "../assets/contacts.json";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  AddContactThunk,
+  deleteContactThunk,
+  fetchContactsThunk,
+} from "./contactsOps";
 
 const initialState = {
-  contacts: contactsData,
+  contacts: [],
+  loading: false,
+  error: null,
 };
 
 const contactsSlice = createSlice({
@@ -11,28 +17,25 @@ const contactsSlice = createSlice({
   selectors: {
     selectContacts: (state) => state.contacts,
   },
-  reducers: {
-    deleteContact: (state, { payload }) => {
-      state.contacts = state.contacts.filter((item) => item.id !== payload);
-    },
 
-    addNewContact: {
-      prepare: (newContact) => {
-        return {
-          payload: {
-            id: nanoid(),
-            name: newContact.name,
-            number: newContact.number,
-          },
-        };
-      },
-      reducer: (state, { payload }) => {
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchContactsThunk.fulfilled, (state, { payload }) => {
+        state.contacts = payload;
+      })
+      .addCase(AddContactThunk.fulfilled, (state, { payload }) => {
         state.contacts.push(payload);
-      },
-    },
+      })
+      .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
+        state.contacts = state.contacts.filter(
+          (item) => item.id !== payload.id
+        );
+      });
   },
 });
 
-export const { addNewContact, deleteContact } = contactsSlice.actions;
+export const { addNewContact, deleteContact, isError, isLoading, dataFetched } =
+  contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
-export const { selectContacts } = contactsSlice.selectors;
+export const { selectContacts, selectIsError, selectIsLoading } =
+  contactsSlice.selectors;
